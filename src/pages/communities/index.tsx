@@ -6,7 +6,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default function CommunityListPage() {
   return (
     <LayoutContainer>
-      <div className="max-w-3xl">
+      <div className="max-w-3xl pt-6 lg:pt-0">
         <CommunityList />
       </div>
     </LayoutContainer>
