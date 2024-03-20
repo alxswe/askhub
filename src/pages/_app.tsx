@@ -28,6 +28,7 @@ export default function App({
     <SafeHydrate>
       <Head>
         <title>AskHub - Your Q&A Plateform</title>
+        <meta property="description" content="Plateform to Q&A" />
       </Head>
       <SessionProvider session={session}>
         <UserContainer>
