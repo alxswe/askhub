@@ -39,14 +39,12 @@ export default function UserContainer({
     });
     if (res.ok) {
       const dt = await res.json();
-      console.log({ dt });
       setCommunities(dt);
     }
   }, [session?.user?.id]);
 
   useEffect(() => {
-    loadUser();
-    loadCommunities();
+    loadUser().then((res) => loadCommunities());
   }, [loadCommunities, loadUser]);
 
   return (

@@ -6,17 +6,14 @@ import SimpleMDEEditor from "@/components/layout/simplemde";
 import { loadCommunities } from "@/components/loaders/loader";
 import { getServerAuthSession } from "@/server/auth";
 import { GetServerSidePropsContext } from "next";
-import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 interface Props {
   communities: ICommunity[];
 }
 
 export default function QuestionCreatePage({ communities = [] }: Props) {
-  const mdeRef = useRef<any>(null);
-  const params = useParams();
   const router = useRouter();
   const [response, setResponse] = useAxiosResponse();
   const [data, setData] = useState({

@@ -39,7 +39,6 @@ export default async function handler(
       },
       data: { ...req.body, id: undefined },
     });
-    console.log({ currentUser });
     res.status(200).json(currentUser);
   } else {
     res.status(405).json({ error: "Method not allowed" });

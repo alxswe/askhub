@@ -3,7 +3,7 @@ import { getServerAuthSession } from "@/server/auth";
 import "@/styles/globals.css";
 import "easymde/dist/easymde.min.css";
 import "highlight.js/styles/github.css"; // Choose the style you prefer
-import { NextApiRequest, NextApiResponse } from "next";
+import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
 import "react-markdown-editor-lite/lib/index.css";
 
@@ -40,10 +40,7 @@ export default function App({
   );
 }
 
-export const getServerSideProps = async (ctx: {
-  req: NextApiRequest;
-  res: NextApiResponse;
-}) => {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const session = await getServerAuthSession(ctx);
   return { props: { session } };
 };
