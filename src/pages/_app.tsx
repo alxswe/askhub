@@ -7,6 +7,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { useState } from "react";
 import "react-markdown-editor-lite/lib/index.css";
 
+import { Analytics } from "@vercel/analytics/react";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -26,15 +27,14 @@ export default function App({
   return (
     <SafeHydrate>
       <Head>
-        <title>
-          AskHub - A place to share knowledge and better understand the world
-        </title>
+        <title>AskHub - Your Q&A Plateform</title>
       </Head>
       <SessionProvider session={session}>
         <UserContainer>
           <Component {...pageProps} />
         </UserContainer>
       </SessionProvider>
+      <Analytics />
     </SafeHydrate>
   );
 }
