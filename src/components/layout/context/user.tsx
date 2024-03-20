@@ -1,12 +1,16 @@
 import { ICommunity } from "@/components/community/component";
+import { User } from "next-auth";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { createContext, useCallback, useEffect, useState } from "react";
 
-export const UserContext = createContext<{
-  currentUser: any;
+type UserContextType = {
+  currentUser: null | User;
   communities: ICommunity[];
   setUser: (...args: any) => any;
-}>({
+};
+
+export const UserContext = createContext<UserContextType>({
   currentUser: null,
   communities: [],
   setUser: () => {},
@@ -17,19 +21,10 @@ export default function UserContainer({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const { data: session } = useSession();
-  const [currentUser, setUser] = useState(null);
+  const [currentUser, setUser] = useState<UserContextType["currentUser"]>(null);
   const [communities, setCommunities] = useState([]);
-
-  const loadUser = useCallback(async () => {
-    const res = await fetch("/api/users/" + session?.user?.id, {
-      credentials: "include",
-    });
-    if (res.ok) {
-      const dt = await res.json();
-      setUser(dt);
-    }
-  }, [session?.user?.id]);
 
   const loadCommunities = useCallback(async () => {
     const search = new URLSearchParams();
@@ -43,9 +38,25 @@ export default function UserContainer({
     }
   }, [session?.user?.id]);
 
+  const loadUser = useCallback(async () => {
+    if (session?.user?.id) {
+      const res = await fetch("/api/users/" + session?.user?.id, {
+        credentials: "include",
+      });
+      if (res.ok) {
+        const dt = await res.json();
+        setUser(dt);
+
+        await loadCommunities();
+      }
+    }
+  }, [session?.user?.id, loadCommunities]);
+
   useEffect(() => {
-    loadUser().then((res) => loadCommunities());
-  }, [loadCommunities, loadUser]);
+    if (router.isReady) {
+      loadUser();
+    }
+  }, [loadCommunities, loadUser, router.isReady]);
 
   return (
     <UserContext.Provider value={{ currentUser, setUser, communities }}>

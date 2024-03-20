@@ -290,7 +290,7 @@ export default function Header() {
 
                   <Link
                     href="/questions/ask"
-                    className="ml-6 inline-flex items-center rounded-full bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                    className="ml-6 inline-flex items-center rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
                   >
                     <PlusIcon className="mr-1 h-5 w-5" aria-hidden="true" />
                     <span>Create</span>
@@ -301,7 +301,7 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={() => signIn("github")}
-                    className="ml-6 inline-flex items-center rounded-full bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                    className="ml-6 inline-flex items-center rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
                   >
                     Login
                   </button>
@@ -372,7 +372,7 @@ export default function Header() {
                 <div className="mx-auto mt-6 max-w-3xl px-4 sm:px-6">
                   <Link
                     href="/questions/ask"
-                    className="flex w-full items-center justify-center rounded-full border border-transparent bg-rose-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-rose-700"
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-rose-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-rose-700"
                   >
                     <PlusIcon className="mr-1 h-5 w-5" aria-hidden="true" />
                     <span>Create</span>
@@ -384,7 +384,7 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={() => signIn("github", { redirect: false })}
-                  className="flex w-full items-center justify-center rounded-full border border-transparent bg-rose-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-rose-700"
+                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-rose-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-rose-700"
                 >
                   Login
                 </button>
