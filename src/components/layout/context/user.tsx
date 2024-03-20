@@ -1,11 +1,10 @@
 import { ICommunity } from "@/components/community/component";
-import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { createContext, useCallback, useEffect, useState } from "react";
 
 type UserContextType = {
-  currentUser: null | User;
+  currentUser: any;
   communities: ICommunity[];
   setUser: (...args: any) => any;
 };
