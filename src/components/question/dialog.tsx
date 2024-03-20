@@ -14,7 +14,6 @@ import { formatNumber, renderValue } from "../utils/renderValue";
 import { QuestionComponentContext } from "./component";
 import { IQuestion } from "./list";
 
-import { CodeBlock, Pre } from "../layout/markdown/CodeBlock";
 import { SimpleMDEPreview } from "../layout/simplemde";
 
 interface FloatingQuestionDetailProps<T> {
@@ -25,7 +24,6 @@ export default function FloatingQuestionDetail({
   element,
 }: FloatingQuestionDetailProps<IQuestion>) {
   const context = useContext(QuestionComponentContext);
-  const MarkdownOptions = { code: CodeBlock, pre: Pre };
 
   return (
     <Transition.Root show={context.action === "open"} as={Fragment}>
