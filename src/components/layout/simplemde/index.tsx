@@ -10,15 +10,14 @@ const rehypePlugins = [rehypeSanitize];
 
 export const SimpleMDEPreview = (props: any) => {
   return (
-    <div className="max-w-full">
-      <MarkdownPreview
-        {...props}
-        rehypePlugins={rehypePlugins}
-        wrapperElement={{
-          "data-color-mode": "light",
-        }}
-      />
-    </div>
+    <MarkdownPreview
+      {...props}
+      rehypePlugins={rehypePlugins}
+      wrapperElement={{
+        "data-color-mode": "light",
+        class: "wmde-markdown wmde-markdown-color",
+      }}
+    />
   );
 };
 

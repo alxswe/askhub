@@ -241,7 +241,7 @@ export function QuestionDetail({ _question }: Props) {
               </li>
             </ul>
           </div>
-          <div className="ml-3 flex-1">
+          <div className="ml-3 flex-1 overflow-hidden">
             <SimpleMDEPreview source={data.content} />
           </div>
         </div>

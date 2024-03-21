@@ -115,7 +115,7 @@ export default function Header() {
                     href="/"
                     className="inline-flex items-center overflow-hidden text-sm font-semibold"
                   >
-                    <span className="px-1">Ask</span>
+                    <span className="pr-1">Ask</span>
                     <span className="rounded-md bg-rose-600 px-1 py-1 text-white">
                       Hub
                     </span>
