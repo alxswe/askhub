@@ -29,8 +29,8 @@ export default function App({
   return (
     <SafeHydrate>
       <Head>
-        <title>AskHub - Your Q&A Plateform</title>
-        <meta property="description" content="Plateform to Q&A" />
+        <title>AskHub - Your Q&A Platform</title>
+        <meta property="description" content="Platform to Q&A" />
       </Head>
       <SessionProvider session={session}>
         <UserContainer>
