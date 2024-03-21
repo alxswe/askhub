@@ -37,7 +37,7 @@ export default async function handler(
       where: {
         id: session.user.id,
       },
-      data: { ...req.body, id: undefined },
+      data: { bookmark },
     });
     res.status(200).json(currentUser);
   } else {

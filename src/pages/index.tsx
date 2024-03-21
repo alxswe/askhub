@@ -11,7 +11,7 @@ export default function Home() {
         <h1 className="border-b border-gray-200 pb-5 pl-4 text-lg font-semibold text-gray-900 lg:pl-0">
           All Questions
         </h1>
-        <div className="mt-6">
+        <div className="">
           <QuestionList />
         </div>
       </div>

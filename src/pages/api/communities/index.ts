@@ -1,5 +1,6 @@
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
+import { Prisma } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -13,15 +14,28 @@ export default async function handler(
       return res.status(401).json({ error: "Unauthorized" });
     }
 
-    const { name } = req.body;
-    const createdCommunity = await db.community.create({
-      data: {
-        name,
-        createdBy: { connect: { id: session.user.id } },
-        members: [session.user.id],
-      },
-    });
-    res.status(201).json(createdCommunity);
+    try {
+      const { name } = req.body;
+      const createdCommunity = await db.community.create({
+        data: {
+          name,
+          createdBy: { connect: { id: session.user.id } },
+          members: [session.user.id],
+        },
+      });
+      res.status(201).json(createdCommunity);
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === "P2002"
+      ) {
+        // Handle unique constraint violation error
+        return res.status(400).json({ error: "Unique constraint violation" });
+      }
+      // Handle other errors
+      console.error("Error:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
   } else if (req.method === "GET") {
     // Get communities for a specific user
     const { userId } = req.query;

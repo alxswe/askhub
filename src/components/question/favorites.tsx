@@ -1,13 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { RadioGroup } from "@headlessui/react";
 import {
   ArchiveBoxArrowDownIcon,
   ClockIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import { uniqueId } from "lodash";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { createContext, useCallback, useEffect, useState } from "react";
 import TailwindAlert from "../alert/http";
@@ -15,104 +11,19 @@ import { useAxiosResponse } from "../client/hook";
 import LoadingNotification from "../layout/LoadingNotification";
 import { removeObjectInList, updateObjectInList } from "../utils/array";
 import { QuestionComponent } from "./component";
+import { IQuestion, SortChoices } from "./list";
 
-interface Props {
-  communityId?: any;
-  createdById?: any;
-}
-
-export interface IQuestion {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-  name: string;
-  content: string;
-  createdById: string;
-  createdBy?: Record<string, any>;
-  communityId: string;
-  community?: Record<string, any>;
-  seen: number[];
-  likes: String[];
-  upvotes: String[];
-  downvotes: String[];
-  _count: {
-    likes: number;
-    comments: number;
-  };
-  is_liked: boolean;
-  is_author: boolean;
-}
-
-export interface IAPIQuestionResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: IQuestion[];
-}
-
-export const QuestionListContext = createContext<{
-  communityId: any;
+export const FavoritedQuestionListContext = createContext<{
   addQuestionToList: (...args: any) => void;
   updateQuestionInList: (...args: any) => void;
   removeQuestionFromList: (...args: any) => void;
 }>({
-  communityId: null,
   addQuestionToList: () => {},
   updateQuestionInList: () => {},
   removeQuestionFromList: () => {},
 });
 
-export const SortChoices = ({
-  label,
-  options,
-  value,
-  onChange,
-}: {
-  label: string;
-  options: { name: any; value: any; title?: string }[];
-  value: any;
-  onChange: (...args: any) => any;
-}) => {
-  return (
-    <div className="flex items-center justify-between">
-      <div className="flex-1">
-        <h2 className="text-sm font-medium leading-6 text-gray-900">{label}</h2>
-      </div>
-
-      <RadioGroup
-        as="div"
-        value={value}
-        onChange={onChange}
-        className="justify-end"
-      >
-        <RadioGroup.Label className="sr-only">{label}</RadioGroup.Label>
-        <div className="flex items-center gap-x-2">
-          {options.map((option) => (
-            <RadioGroup.Option
-              key={uniqueId()}
-              title={option.title}
-              value={option.value}
-              className={({ active, checked }) =>
-                clsx(
-                  active ? "ring-2 ring-indigo-600 ring-offset-2" : "",
-                  checked
-                    ? "bg-indigo-600 text-white hover:bg-indigo-500"
-                    : "bg-white text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50",
-                  "flex items-center justify-center rounded-md p-2 text-sm font-semibold sm:flex-1",
-                )
-              }
-            >
-              <RadioGroup.Label as="span">{option.name}</RadioGroup.Label>
-            </RadioGroup.Option>
-          ))}
-        </div>
-      </RadioGroup>
-    </div>
-  );
-};
-
-export function QuestionList({ communityId, createdById }: Props) {
-  const { data: session } = useSession();
+export function FavoritedQuestionList() {
   const router = useRouter();
   const [params, setParams] = useState({
     take: 9,
@@ -150,15 +61,8 @@ export function QuestionList({ communityId, createdById }: Props) {
       // @ts-expect-error:  No index signature with a parameter of type 'string' was found on type '{ take: number; skip: number; }'.ts(7053)
       searchParams.set(key, params[key] as string);
     });
-    if (communityId) {
-      searchParams.set("communityId", communityId);
-    }
 
-    if (createdById) {
-      searchParams.set("createdById", createdById);
-    }
-
-    const res = await fetch(`/api/questions?${searchParams}`, {
+    const res = await fetch(`/api/users/favorites?${searchParams}`, {
       credentials: "include",
       signal: controller.signal,
     });
@@ -178,7 +82,7 @@ export function QuestionList({ communityId, createdById }: Props) {
     return () => {
       controller.abort();
     };
-  }, [communityId, createdById, params, setResponse]);
+  }, [params, setResponse]);
 
   const handleOffset = () => {
     setParams((prev) => ({
@@ -194,15 +98,14 @@ export function QuestionList({ communityId, createdById }: Props) {
   }, [fetchQuestions, router.isReady]);
 
   return (
-    <QuestionListContext.Provider
+    <FavoritedQuestionListContext.Provider
       value={{
-        communityId,
         addQuestionToList,
         updateQuestionInList,
         removeQuestionFromList,
       }}
     >
-      <div className="mb-3 bg-gray-200 px-4 py-2 lg:rounded-md">
+      <div className="mb-3 bg-gray-200 p-2 px-4 lg:rounded-md">
         <SortChoices
           label="Sorting"
           options={[
@@ -261,6 +164,6 @@ export function QuestionList({ communityId, createdById }: Props) {
       )}
 
       <LoadingNotification show={loading} />
-    </QuestionListContext.Provider>
+    </FavoritedQuestionListContext.Provider>
   );
 }

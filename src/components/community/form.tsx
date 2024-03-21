@@ -47,7 +47,7 @@ export function FloatingCommunityForm({
     const data = { ...state };
     const res = await fetch("/api/communities", {
       method: "POST",
-      body: JSON.stringify(data), // Convert data to JSON
+      body: JSON.stringify(data),
       credentials: "include",
       headers: {
         "Content-Type": "application/json",

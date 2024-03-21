@@ -1,9 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import {
-  ChatBubbleLeftEllipsisIcon,
-  HandThumbUpIcon,
-} from "@heroicons/react/20/solid";
-import clsx from "clsx";
 import moment from "moment";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -12,7 +7,6 @@ import pluralize from "pluralize";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import TailwindAlert from "../alert/http";
 import { useAxiosResponse } from "../client/hook";
-import { formatNumber, renderValue } from "../utils/renderValue";
 import { IQuestion, QuestionListContext } from "./list";
 
 export const QuestionComponentContext = createContext<{
@@ -139,118 +133,45 @@ export function QuestionComponent({ question }: { question: IQuestion }) {
                 {data.name}
               </Link>
               {data.community ? (
-                <span className="text-gray-500">
-                  {" "}
-                  in{" "}
-                  <Link
-                    href={{
-                      pathname: "/communities/[id]",
-                      query: { id: data.communityId },
-                    }}
-                    className="font-semibold underline"
-                  >
-                    r/{data.community!.name}
-                  </Link>
-                </span>
+                <span className="text-gray-500"> in </span>
               ) : (
                 <div />
               )}
             </div>
           </div>
-          <div className="flex flex-col items-end text-sm">
-            <p className="text-xs">
-              <span className="text-gray-500">Modified</span>{" "}
-              {moment(data.updatedAt).fromNow(true)}
-            </p>
-            <Link
-              href={{
-                pathname: "/user/[id]",
-                query: { id: data.createdById },
-              }}
-              className="hover:text-hover-600 mt-1 inline-flex gap-x-1 text-gray-700"
-            >
-              <img
-                className="h-5 w-5 rounded-md"
-                src={data.createdBy!.image}
-                alt=""
-              />
-              {data.createdBy!.name}
-            </Link>
-          </div>
-
-          {/*  */}
-          <div className="hidden">
-            <div className="flex space-x-3">
-              <div className="flex-shrink-0">
-                <img
-                  className="h-10 w-10 rounded-full object-contain object-center"
-                  src={
-                    data.createdBy?.image ??
-                    "https://i.redd.it/snoovatar/avatars/8bff7be9-8bfc-4732-a92a-989dce79d8ff.png"
-                  }
-                  alt={data.createdBy?.name}
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-gray-900">
-                  <span>u/{data.createdBy?.name}</span>
-                  {data.community && (
-                    <span className="text-gray-500">
-                      {" "}
-                      in {data.community?.name}
-                    </span>
-                  )}
-                </p>
-                <p className="text-sm text-gray-500">
-                  <time dateTime={data.createdAt}>
-                    {renderValue(data.createdAt, "datetime")}
-                  </time>
-                </p>
-              </div>
-            </div>
-            <h2
-              id={"question-name-" + data.id}
-              className="mt-4 text-base font-medium text-gray-900"
-            >
+          <div className="mt-3 flex items-center justify-between">
+            {data.communityId ? (
               <Link
                 href={{
-                  pathname: "/questions/[id]",
-                  query: { id: data.id },
+                  pathname: "/communities/[id]",
+                  query: { id: data.communityId },
                 }}
+                className="text-sm font-semibold text-gray-700 underline hover:text-gray-600"
               >
-                <span className="absolute inset-x-0 -top-px bottom-0" />
-                {data.name}
+                r/{data.community!.name}
               </Link>
-            </h2>
-          </div>
-          <div className="mt-6 hidden justify-between space-x-8">
-            <div className="flex space-x-6">
-              <span className="inline-flex items-center text-sm">
-                <p
-                  className={clsx(
-                    "text-gray-400 hover:text-gray-500",
-                    "inline-flex space-x-2",
-                  )}
-                >
-                  <HandThumbUpIcon className="h-5 w-5" aria-hidden="true" />
-                  <span className="font-medium text-gray-900">
-                    {data._count?.likes}
-                  </span>
-                  <span className="sr-only">likes</span>
-                </p>
-              </span>
-              <span className="inline-flex items-center text-sm">
-                <p className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                  <ChatBubbleLeftEllipsisIcon
-                    className="h-5 w-5"
-                    aria-hidden="true"
-                  />
-                  <span className="font-medium text-gray-900">
-                    {formatNumber(data._count?.comments)}
-                  </span>
-                  <span className="sr-only">comments</span>
-                </p>
-              </span>
+            ) : (
+              <div />
+            )}
+            <div className="flex flex-col items-end text-sm">
+              <p className="text-xs">
+                <span className="text-gray-500">Asked</span>{" "}
+                {moment(data.createdAt).fromNow()}
+              </p>
+              <Link
+                href={{
+                  pathname: "/user/[id]",
+                  query: { id: data.createdById },
+                }}
+                className="hover:text-hover-600 mt-1 inline-flex gap-x-1 text-gray-700"
+              >
+                <img
+                  className="h-5 w-5 rounded-md"
+                  src={data.createdBy!.image}
+                  alt=""
+                />
+                {data.createdBy!.name}
+              </Link>
             </div>
           </div>
         </article>

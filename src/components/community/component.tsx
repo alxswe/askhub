@@ -2,6 +2,7 @@
 import LoadingNotification from "@/components/layout/LoadingNotification";
 import { formatNumber } from "@/components/utils/renderValue";
 import { PlusIcon } from "@heroicons/react/20/solid";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import pluralize from "pluralize";
@@ -23,6 +24,7 @@ export interface ICommunity {
 
 export default function CommunityList() {
   const router = useRouter();
+  const { data: session } = useSession();
   const [response, setResponse] = useAxiosResponse();
   const [loading, setLoading] = useState(false);
   const [communities, setCommunities] = useState<ICommunity[]>([]);
@@ -127,15 +129,17 @@ export default function CommunityList() {
         <div>
           <div className="flex items-center justify-between px-4 pb-5 sm:px-0">
             <h1 className="text-lg font-medium text-gray-700">Communities</h1>
-            <button
-              type="button"
-              onClick={() =>
-                setSelector((prev) => ({ ...prev, create: !prev.create }))
-              }
-              className="bg-indigo-60 inline-flex items-center gap-x-1 rounded-lg text-sm font-medium text-gray-700 hover:text-gray-600 focus:outline-none"
-            >
-              <PlusIcon className="h-5 w-5" aria-hidden="true" />
-            </button>
+            {session?.user?.id && (
+              <button
+                type="button"
+                onClick={() =>
+                  setSelector((prev) => ({ ...prev, create: !prev.create }))
+                }
+                className="bg-indigo-60 inline-flex items-center gap-x-1 rounded-lg text-sm font-medium text-gray-700 hover:text-gray-600 focus:outline-none"
+              >
+                <PlusIcon className="h-5 w-5" aria-hidden="true" />
+              </button>
+            )}
           </div>
           {hasContent ? (
             <>
