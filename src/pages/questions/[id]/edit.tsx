@@ -11,7 +11,6 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useCallback, useMemo, useState } from "react";
-import "react-markdown-editor-lite/lib/index.css";
 
 interface Props {
   _question: IQuestion;

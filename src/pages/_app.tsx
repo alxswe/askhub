@@ -2,16 +2,18 @@ import UserContainer from "@/components/layout/context/user";
 import { getServerAuthSession } from "@/server/auth";
 import "@/styles/globals.css";
 import "easymde/dist/easymde.min.css";
-import "highlight.js/styles/github.css"; // Choose the style you prefer
 import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
-import "react-markdown-editor-lite/lib/index.css";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect } from "react";
+
+export function reportWebVitals(metric: any) {
+  console.log(metric);
+}
 
 function SafeHydrate({ children }: { children: React.ReactNode }) {
   const [client, setClient] = useState(false);
