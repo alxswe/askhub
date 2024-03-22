@@ -132,11 +132,6 @@ export function QuestionComponent({ question }: { question: IQuestion }) {
               >
                 {data.name}
               </Link>
-              {data.community ? (
-                <span className="text-gray-500"> in </span>
-              ) : (
-                <div />
-              )}
             </div>
           </div>
           <div className="mt-3 flex items-center justify-between">
