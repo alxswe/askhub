@@ -35,7 +35,7 @@ export default function UserProfile({ _user }: Props) {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
         <div className="lg:col-span-2 xl:col-span-2">
           <Tab.Group>
-            <div className="mb-5 border-b border-gray-200">
+            <div className="border-b border-gray-200">
               <Tab.List as="nav" className="-mb-px flex">
                 {tabs.map((tab) => (
                   <Tab key={tab.name} as={Fragment}>
@@ -82,7 +82,7 @@ export default function UserProfile({ _user }: Props) {
                     u/{_user.name}
                   </p>
                   <p className="text-sm text-gray-500">
-                    {_user.followers.length}
+                    {_user.followers.length}{" "}
                     {pluralize("Follower", _user.followers.length)}
                   </p>
                 </div>
