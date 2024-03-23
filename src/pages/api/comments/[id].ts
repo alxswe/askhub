@@ -2,6 +2,12 @@ import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
+const include = {
+  question: true,
+  community: true,
+  createdBy: true,
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -17,11 +23,7 @@ export default async function handler(
         // @ts-expect-error: Type 'string | string[] | undefined' is not assignable to type 'string | undefined'.ts(2322)
         id,
       },
-      include: {
-        createdBy: true,
-        question: true,
-        community: true,
-      },
+      include,
     });
 
     if (!comment) {
@@ -45,11 +47,7 @@ export default async function handler(
       data: {
         content,
       },
-      include: {
-        createdBy: true,
-        question: true,
-        community: true,
-      },
+      include,
     });
     res.status(200).json(updatedQuestion);
   } else if (req.method === "DELETE") {

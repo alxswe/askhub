@@ -2,6 +2,12 @@ import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
+const include = {
+  question: true,
+  community: true,
+  createdBy: true,
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -36,11 +42,7 @@ export default async function handler(
         ...parents,
       },
 
-      include: {
-        question: true,
-        community: true,
-        createdBy: true,
-      },
+      include,
     });
     res.status(201).json(createdComment);
   } else if (req.method === "GET") {
@@ -61,11 +63,7 @@ export default async function handler(
       skip: req.query.skip ? parseInt(req.query.skip as string) : 0,
       orderBy: [{ createdAt: "desc" }],
       where,
-      include: {
-        question: true,
-        community: true,
-        createdBy: true,
-      },
+      include,
     });
     res.status(200).json(comments);
   } else {

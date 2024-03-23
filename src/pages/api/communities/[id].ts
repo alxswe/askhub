@@ -2,6 +2,15 @@ import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
+const include = {
+  createdBy: true,
+  _count: {
+    select: {
+      questions: true,
+    },
+  },
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -17,14 +26,7 @@ export default async function handler(
         // @ts-expect-error: Type 'string | string[] | undefined' is not assignable to type 'string | undefined'.ts(2322)
         id,
       },
-      include: {
-        createdBy: true,
-        _count: {
-          select: {
-            questions: true,
-          },
-        },
-      },
+      include,
     });
 
     if (!community) {
@@ -43,15 +45,12 @@ export default async function handler(
       where: {
         // @ts-expect-error: Type 'string | string[] | undefined' is not assignable to type 'string | undefined'.ts(2322)
         id,
-        createdById: session.user.id,
       },
       data: {
         name,
         members,
       },
-      include: {
-        createdBy: true,
-      },
+      include,
     });
     res.status(200).json(updatedCommunity);
   } else if (req.method === "DELETE") {

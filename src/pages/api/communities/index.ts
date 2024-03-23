@@ -3,6 +3,15 @@ import { db } from "@/server/db";
 import { Prisma } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
+const include = {
+  createdBy: true,
+  _count: {
+    select: {
+      questions: true,
+    },
+  },
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -61,14 +70,7 @@ export default async function handler(
             contains: (req.query.search as string) ?? "",
           },
         },
-        include: {
-          createdBy: true,
-          _count: {
-            select: {
-              questions: true,
-            },
-          },
-        },
+        include,
       });
       res.status(200).json(communities);
     }

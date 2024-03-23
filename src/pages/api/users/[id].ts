@@ -32,12 +32,12 @@ export default async function handler(
     }
 
     // Update a question by id
-    const { bookmark } = req.body;
+    const { name, bookmark } = req.body;
     const currentUser = await db.user.update({
       where: {
         id: session.user.id,
       },
-      data: { bookmark },
+      data: { name, bookmark },
     });
     res.status(200).json(currentUser);
   } else {

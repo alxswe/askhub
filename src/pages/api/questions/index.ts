@@ -2,6 +2,16 @@ import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
+const include = {
+  community: true,
+  createdBy: true,
+  _count: {
+    select: {
+      comments: true,
+    },
+  },
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -63,15 +73,7 @@ export default async function handler(
       skip: req.query.skip ? parseInt(req.query.skip as string) : 0,
       orderBy: [{ [orderBy as string]: "desc" }],
       where,
-      include: {
-        community: true,
-        createdBy: true,
-        _count: {
-          select: {
-            comments: true,
-          },
-        },
-      },
+      include,
     });
     res.status(200).json(questions);
   } else {
