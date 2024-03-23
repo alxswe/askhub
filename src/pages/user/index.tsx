@@ -8,11 +8,12 @@ import { getServerAuthSession } from "@/server/auth";
 import { Tab } from "@headlessui/react";
 import {
   ArrowLeftEndOnRectangleIcon,
-  CogIcon,
+  PencilIcon,
 } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { GetServerSidePropsContext } from "next";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import pluralize from "pluralize";
 import { Fragment, useState } from "react";
@@ -88,13 +89,14 @@ export default function UserProfile({ _user }: Props) {
                 </div>
               </div>
               <div className="flex w-full flex-col space-y-2 border-t border-gray-200 bg-gray-200 px-4 py-6 sm:p-6">
-                <button
+                <Link
+                  href="/user/update"
                   type="button"
                   className="inline-flex w-full items-center justify-center rounded-full bg-white px-3.5 py-2 text-gray-900 ring-1 ring-inset ring-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
-                  <CogIcon className="h-5 w-5" aria-hidden="true" />
-                  <span className="ml-2 text-sm font-medium">Settings</span>
-                </button>
+                  <PencilIcon className="h-5 w-5" aria-hidden="true" />
+                  <span className="ml-2 text-sm font-medium">Update</span>
+                </Link>
                 <button
                   type="button"
                   onClick={() =>
