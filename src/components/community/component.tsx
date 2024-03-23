@@ -2,6 +2,7 @@
 import LoadingNotification from "@/components/layout/LoadingNotification";
 import { formatNumber } from "@/components/utils/renderValue";
 import { PlusIcon } from "@heroicons/react/20/solid";
+import { UserGroupIcon } from "@heroicons/react/24/outline";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -127,7 +128,7 @@ export default function CommunityList() {
       <div className="space-y-4">
         <TailwindAlert error={response} />
         <div>
-          <div className="flex items-center justify-between px-4 pb-5 sm:px-0">
+          <div className="flex items-center justify-between border-b border-gray-200 px-4 pb-5 sm:px-0">
             <h1 className="text-lg font-medium text-gray-700">Communities</h1>
             {session?.user?.id && (
               <button
@@ -189,7 +190,7 @@ export default function CommunityList() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-3">
+              <div className="mt-3 border-t border-gray-200">
                 <button
                   type="button"
                   onClick={handleOffset}
@@ -199,7 +200,21 @@ export default function CommunityList() {
                 </button>
               </div>
             </>
-          ) : null}
+          ) : (
+            <div className="py-12 text-center">
+              <UserGroupIcon
+                className="mx-auto h-12 w-12 text-gray-400"
+                aria-hidden="true"
+              />
+
+              <h3 className="mt-2 text-sm font-semibold text-gray-900">
+                No communities
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                Get started by creating a new community
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <LoadingNotification show={loading} />

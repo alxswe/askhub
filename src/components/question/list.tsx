@@ -202,7 +202,7 @@ export function QuestionList({ communityId, createdById }: Props) {
         removeQuestionFromList,
       }}
     >
-      <div className="mb-3 bg-gray-200 px-4 py-2 lg:rounded-md">
+      <div className="mb-3 bg-gray-200 px-4 py-2">
         <SortChoices
           label="Sorting"
           options={[

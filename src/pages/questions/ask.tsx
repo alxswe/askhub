@@ -62,16 +62,20 @@ export default function QuestionCreatePage({ communities = [] }: Props) {
       <form onSubmit={onSubmit} className="px-4 py-6 sm:px-0  lg:py-0">
         <div>
           <div className="flex items-center justify-between border-b border-gray-200 pb-5">
-            <h1 className="text-lg font-semibold text-gray-900">
-              Ask your question
-            </h1>
-            <button
-              type="submit"
-              disabled={disableButton}
-              className="inline-flex w-full items-center justify-center rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 disabled:bg-gray-300 sm:w-fit"
-            >
-              Post
-            </button>
+            <div className="min-w-0 flex-1 truncate">
+              <h1 className="text-sm font-semibold text-gray-900 lg:text-lg">
+                Ask your question
+              </h1>
+            </div>
+            <div className="flex-shrink-0">
+              <button
+                type="submit"
+                disabled={disableButton}
+                className="inline-flex w-full items-center justify-center rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 disabled:bg-gray-300 sm:w-fit"
+              >
+                Post
+              </button>
+            </div>
           </div>
           <div className="mt-5 space-y-4">
             <TailwindAlert error={response} />

@@ -64,10 +64,12 @@ export default function QuestionCreatePage({ _question }: Props) {
       <form onSubmit={onSubmit} className="px-4 py-6 sm:px-0  lg:py-0">
         <div>
           <div className="flex items-center justify-between border-b border-gray-200 pb-5">
-            <h1 className="text-lg font-semibold text-gray-900">
-              Update your question
-            </h1>
-            <div className="flex items-center gap-x-2">
+            <div className="flex-1">
+              <h1 className="text-sm font-semibold text-gray-900 lg:text-lg">
+                Update your question
+              </h1>
+            </div>
+            <div className="flex flex-shrink-0 items-center gap-x-2">
               <button
                 type="submit"
                 disabled={disableButton}

@@ -105,7 +105,7 @@ export function FavoritedQuestionList() {
         removeQuestionFromList,
       }}
     >
-      <div className="mb-3 bg-gray-200 p-2 px-4 lg:rounded-md">
+      <div className="mb-3 bg-gray-200 p-2 px-4">
         <SortChoices
           label="Sorting"
           options={[

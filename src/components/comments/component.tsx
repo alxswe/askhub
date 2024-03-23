@@ -24,9 +24,14 @@ interface IComment {
 interface Props {
   questionId?: any;
   showEditor?: boolean;
+  setshowEditor?: (...args: any) => any;
 }
 
-export default function CommentList({ questionId, showEditor = false }: Props) {
+export default function CommentList({
+  questionId,
+  showEditor = false,
+  setshowEditor,
+}: Props) {
   const [params, setParams] = useState<Record<string, any>>({
     take: 9,
     skip: 0,
@@ -56,6 +61,7 @@ export default function CommentList({ questionId, showEditor = false }: Props) {
     const dt = await res.json();
     if (res.ok) {
       setComments((prev) => [dt, ...prev]);
+      setshowEditor?.(false);
       setContent("");
     } else {
       setResponse(res);

@@ -179,7 +179,15 @@ export function QuestionDetail({ _question }: Props) {
               {data.communityId && (
                 <p className="gap-x-1">
                   <span className="text-gray-500">In</span>{" "}
-                  <span className="text-gray-900">{data?.community?.name}</span>
+                  <Link
+                    href={{
+                      pathname: "/communities/[id]",
+                      query: { id: data.communityId },
+                    }}
+                    className="text-gray-900 hover:underline"
+                  >
+                    {data?.community?.name}
+                  </Link>
                 </p>
               )}
             </div>
@@ -282,11 +290,6 @@ export function QuestionDetail({ _question }: Props) {
                     Delete
                   </button>
                 </li>
-                <li>
-                  <button className="pr-2 text-gray-700 hover:text-gray-600">
-                    Flag
-                  </button>
-                </li>
               </>
             )}
           </ul>
@@ -327,7 +330,11 @@ export function QuestionDetail({ _question }: Props) {
         </div>
       </article>
       <div className="mt-6 border-t border-gray-200 pt-5">
-        <CommentList showEditor={isCommenting} questionId={data?.id} />
+        <CommentList
+          showEditor={isCommenting}
+          setshowEditor={setCommenting}
+          questionId={data?.id}
+        />
       </div>
     </div>
   );
