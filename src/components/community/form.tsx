@@ -5,7 +5,6 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { httpClient } from "../client";
 import { useAxiosResponse, useNextHeaders } from "../client/hook";
 import DynamicForm from "../form";
-import { ICommunity } from "./component";
 
 interface FloatingCommunityFormProps<T> {
   element: T | Partial<T> | null;

@@ -12,17 +12,6 @@ import TailwindAlert from "../alert/http";
 import { useAxiosResponse } from "../client/hook";
 import { FloatingCommunityForm } from "./form";
 
-export interface ICommunity {
-  id: string;
-  name: string;
-  description: string;
-  members: String[];
-  createdById: string;
-  createdBy: Record<string, any>;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export default function CommunityList() {
   const router = useRouter();
   const { data: session } = useSession();
