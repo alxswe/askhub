@@ -1,6 +1,5 @@
 import TailwindAlert from "@/components/alert/http";
 import { useAxiosResponse } from "@/components/client/hook";
-import { ICommunity } from "@/components/community/component";
 import LayoutContainer from "@/components/layout/Container";
 import { loadCommunity } from "@/components/loaders/loader";
 import { QuestionList } from "@/components/question/list";

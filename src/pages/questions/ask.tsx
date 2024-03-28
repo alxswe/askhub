@@ -1,6 +1,5 @@
 import TailwindAlert from "@/components/alert/http";
 import { useAxiosResponse } from "@/components/client/hook";
-import { ICommunity } from "@/components/community/component";
 import LayoutContainer from "@/components/layout/Container";
 import SimpleMDEEditor from "@/components/layout/simplemde";
 import { loadCommunities } from "@/components/loaders/loader";

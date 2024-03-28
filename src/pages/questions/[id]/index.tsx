@@ -2,7 +2,6 @@
 import LayoutContainer from "@/components/layout/Container";
 import { loadQuestion } from "@/components/loaders/loader";
 import { QuestionDetail } from "@/components/question/detail";
-import { IQuestion } from "@/components/question/list";
 import { getServerAuthSession } from "@/server/auth";
 import { GetServerSidePropsContext } from "next";
 

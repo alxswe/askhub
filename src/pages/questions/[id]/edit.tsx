@@ -3,7 +3,6 @@ import { useAxiosResponse } from "@/components/client/hook";
 import LayoutContainer from "@/components/layout/Container";
 import SimpleMDEEditor from "@/components/layout/simplemde";
 import { loadQuestion } from "@/components/loaders/loader";
-import { IQuestion } from "@/components/question/list";
 import { getServerAuthSession } from "@/server/auth";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { GetServerSidePropsContext } from "next";
