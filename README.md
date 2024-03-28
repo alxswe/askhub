@@ -25,8 +25,9 @@
 
 ## Technologies Used
 
-- **Frontend**: Next.js
+- **Technologies**: Next.js, TailwindUI
 - **Authentication**: Github OAuth
+- **Database**: Mongo Atlas Cloud Services + Prisma ORM
 
 ## About ALXSWE Program
 
