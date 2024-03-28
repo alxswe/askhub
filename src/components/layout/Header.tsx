@@ -14,8 +14,6 @@ import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { Fragment, useCallback, useRef, useState } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
-import { ICommunity } from "../community/component";
-import { IQuestion } from "../question/list";
 
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon, current: false },

@@ -1,4 +1,3 @@
-import { ICommunity } from "@/components/community/component";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { createContext, useCallback, useEffect, useState } from "react";
