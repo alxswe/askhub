@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import TailwindAlert from "@/components/alert/http";
 import { useAxiosResponse } from "@/components/client/hook";
-import CommentList from "@/components/comments/component";
 import DeleteNotification from "@/components/layout/DeleteNotification";
 import { formatNumber } from "@/components/utils/renderValue";
 import { BookmarkIcon as FilledBookmarkIcon } from "@heroicons/react/20/solid";
@@ -17,9 +16,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import pluralize from "pluralize";
 import { useContext, useMemo, useState } from "react";
+import CommentList from "../comments/list";
 import { UserContext } from "../layout/context/user";
 import { SimpleMDEPreview } from "../layout/simplemde";
-import { IQuestion } from "./list";
 
 interface Props {
   _question: IQuestion;

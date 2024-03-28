@@ -9,58 +9,18 @@ import clsx from "clsx";
 import { uniqueId } from "lodash";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { createContext, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import TailwindAlert from "../alert/http";
 import { useAxiosResponse } from "../client/hook";
 import LoadingNotification from "../layout/LoadingNotification";
 import { removeObjectInList, updateObjectInList } from "../utils/array";
 import { QuestionComponent } from "./component";
+import { QuestionListContext } from "./context";
 
 interface Props {
   communityId?: any;
   createdById?: any;
 }
-
-export interface IQuestion {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-  name: string;
-  content: string;
-  createdById: string;
-  createdBy?: Record<string, any>;
-  communityId: string;
-  community?: Record<string, any>;
-  seen: number[];
-  likes: String[];
-  upvotes: String[];
-  downvotes: String[];
-  _count: {
-    likes: number;
-    comments: number;
-  };
-  is_liked: boolean;
-  is_author: boolean;
-}
-
-export interface IAPIQuestionResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: IQuestion[];
-}
-
-export const QuestionListContext = createContext<{
-  communityId: any;
-  addQuestionToList: (...args: any) => void;
-  updateQuestionInList: (...args: any) => void;
-  removeQuestionFromList: (...args: any) => void;
-}>({
-  communityId: null,
-  addQuestionToList: () => {},
-  updateQuestionInList: () => {},
-  removeQuestionFromList: () => {},
-});
 
 export const SortChoices = ({
   label,

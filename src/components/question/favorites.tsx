@@ -11,7 +11,7 @@ import { useAxiosResponse } from "../client/hook";
 import LoadingNotification from "../layout/LoadingNotification";
 import { removeObjectInList, updateObjectInList } from "../utils/array";
 import { QuestionComponent } from "./component";
-import { IQuestion, SortChoices } from "./list";
+import { SortChoices } from "./list";
 
 export const FavoritedQuestionListContext = createContext<{
   addQuestionToList: (...args: any) => void;
